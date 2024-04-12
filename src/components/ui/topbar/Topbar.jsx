@@ -35,6 +35,11 @@ export default function Topbar() {
           </div>
           <div className="topbarListItem">
             <span className="sidebarListItemText">
+              <Link to="/">Home</Link>
+            </span>
+          </div>
+          <div className="topbarListItem">
+            <span className="sidebarListItemText">
               <Link to="/contactus">Contact Us</Link>
             </span>
           </div>

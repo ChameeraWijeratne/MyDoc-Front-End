@@ -1,0 +1,46 @@
+.select-container {
+  position: absolute;
+  top: 100px; /* Adjust as needed */
+  right: -200px; /* Adjust as needed */
+}
+
+.select-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  width: 200px;
+  outline: none;
+}
+
+.select-container select:hover {
+  border-color: #999;
+}
+
+.select-container select:focus {
+  border-color: #555;
+}
+
+.select-container::before {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #555;
+  pointer-events: none;
+}
+
+.select-container select::-ms-expand {
+  display: none;
+}
+
+/* Optional: Add styles for the options dropdown */
+.select-container select option {
+  padding: 10px;
+}

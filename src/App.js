@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Register from './pages/Signup/Signup';
 import DoctorReg from './pages/DoctorReg/DoctorReg';
 import UserReg from './pages/UserReg/UserReg';
+import Doctors from './pages/Doctors/Doctors';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/userreg" element={<UserReg />} />
         <Route path="/docreg" element={<DoctorReg />} />
+        <Route path="/doctors" element={<Doctors />} />
       </Routes>
     </Router>
   );

@@ -6,6 +6,9 @@ import Logo from './../../assest/data/images/Logo.png';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavigateNext } from '@mui/icons-material';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { imageDb } from './Config';
+import { ref, uploadBytes, updateMetadata } from 'firebase/storage';
+import { v4 } from 'uuid';
 
 <link
   rel="stylesheet"
@@ -46,20 +49,91 @@ export default function DoctorRegFrm() {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [contactNumber, setContactNumber] = useState('');
   const [isContactNumberValid, setIsContactNumberValid] = useState(true);
+  const [proPic, setProPic] = useState('');
+  const [certificate, setCertificate] = useState('');
 
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      profilePic: file,
-    });
+    setProPic(file);
+    const fileId = v4();
+    const fileExtension = file.type.split('/')[1];
+    const imgRef = ref(imageDb, `files/ProPics/${fileId}.${fileExtension}`);
+
+    uploadBytes(imgRef, file)
+      .then((snapshot) => {
+        console.log('File uploaded successfully:', snapshot);
+
+        const newMetadata = {
+          contentType: 'image/jpeg', // Update the content type to image/jpeg
+          // You can add more metadata properties here if needed
+        };
+
+        // Update metadata properties
+        updateMetadata(imgRef, newMetadata)
+          .then((metadata) => {
+            console.log('Metadata updated successfully:', metadata);
+            // Metadata for the uploaded file is returned in the Promise
+          })
+          .catch((error) => {
+            console.error('Error updating metadata:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Error uploading file:', error);
+      });
+
+    uploadBytes(imgRef, proPic)
+      .then(() => {
+        console.log('Image uploaded successfully');
+        setProPic(file);
+        setFormData({
+          ...formData,
+          profilePic: `${fileId}.${fileExtension}`,
+        });
+      })
+      .catch((error) => {
+        console.error('Error uploading image:', error);
+        // Handle error (e.g., display error message to user)
+      });
   };
 
   const handleCertificateImageChange = (e) => {
-    const file = e.target.files[0];
+    const file1 = e.target.files[0];
+    setCertificate(file1);
+    const file1Id = v4();
+    const file1Extension = file1.type.split('/')[1];
+    const imgRef1 = ref(
+      imageDb,
+      `files/Certificates/${file1Id}.${file1Extension}`
+    );
+
+    uploadBytes(imgRef1, file1)
+      .then((snapshot) => {
+        console.log('File uploaded successfully:', snapshot);
+
+        const newMetadata = {
+          contentType: 'image/jpeg', // Update the content type to image/jpeg
+          // You can add more metadata properties here if needed
+        };
+
+        // Update metadata properties
+        updateMetadata(imgRef1, newMetadata)
+          .then((metadata) => {
+            console.log('Metadata updated successfully:', metadata);
+            // Metadata for the uploaded file is returned in the Promise
+          })
+          .catch((error) => {
+            console.error('Error updating metadata:', error);
+          });
+      })
+      .catch((error) => {
+        console.error('Error uploading file:', error);
+      });
+
+    uploadBytes(imgRef1, certificate);
     setFormData({
       ...formData,
-      mbbsCertificate: file,
+      mbbsCertificate: `${file1Id}.${file1Extension}`,
     });
   };
 
@@ -430,6 +504,7 @@ export default function DoctorRegFrm() {
                   type="file"
                   name="profilePic"
                   onChange={handleProfileImageChange}
+                  required
                 />
               </div>
             </div>
@@ -555,11 +630,13 @@ export default function DoctorRegFrm() {
                   <option value="" disabled selected>
                     Select Doctor Category
                   </option>
-                  <option value="general">General Practitioner</option>
-                  <option value="pediatrician">Pediatrician</option>
-                  <option value="cardiologist">Cardiologist</option>
-                  <option value="dermatologist">Dermatologist</option>
-                  <option value="dermatologist">Neurologist</option>
+                  <option value="General Practitioner">
+                    General Practitioner
+                  </option>
+                  <option value="Pediatrician">Pediatrician</option>
+                  <option value="Cardiologist">Cardiologist</option>
+                  <option value="Dermatologist">Dermatologist</option>
+                  <option value="Neurologist">Neurologist</option>
                 </select>
               </div>
             </div>
