@@ -29,9 +29,10 @@ export const DoctorList = () => {
 
   const filteredDoctors =
     selectedCategory === ''
-      ? doctorData
+      ? doctorData.filter((doctor) => doctor.activate)
       : doctorData.filter(
-          (doctor) => doctor.doctorCategory === selectedCategory
+          (doctor) =>
+            doctor.doctorCategory === selectedCategory && doctor.activate
         );
 
   return (
@@ -57,7 +58,7 @@ export const DoctorList = () => {
               id={item._id}
               name={item.firstName + ' ' + item.lastName}
               image={item.profilePic}
-              category={item.doctorCategory}
+              category={item.doctorCategory + ' (MBBS ' + item.mbbsId + ')'}
               city={item.city}
             />
           );

@@ -15,6 +15,11 @@ export default function Topbar() {
         <div className="menuIcons">
           <div className="topbarListItem">
             <span className="sidebarListItemText">
+              <Link to="/approvals">Approvals</Link>
+            </span>
+          </div>
+          <div className="topbarListItem">
+            <span className="sidebarListItemText">
               <Link to="/doctors">Doctors</Link>
             </span>
           </div>

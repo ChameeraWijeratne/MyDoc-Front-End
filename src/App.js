@@ -7,6 +7,7 @@ import Register from './pages/Signup/Signup';
 import DoctorReg from './pages/DoctorReg/DoctorReg';
 import UserReg from './pages/UserReg/UserReg';
 import Doctors from './pages/Doctors/Doctors';
+import Approvals from './pages/Approvals/Approvals';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/userreg" element={<UserReg />} />
         <Route path="/docreg" element={<DoctorReg />} />
         <Route path="/doctors" element={<Doctors />} />
+        <Route path="/approvals" element={<Approvals />} />
       </Routes>
     </Router>
   );

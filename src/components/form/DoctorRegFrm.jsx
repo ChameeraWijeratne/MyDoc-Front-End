@@ -112,7 +112,7 @@ export default function DoctorRegFrm() {
         console.log('File uploaded successfully:', snapshot);
 
         const newMetadata = {
-          contentType: 'image/jpeg', // Update the content type to image/jpeg
+          contentType: 'application/pdf', // Update the content type to image/jpeg
           // You can add more metadata properties here if needed
         };
 

@@ -1,4 +1,4 @@
-.doctor-list {
+.approval-list {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,14 +10,14 @@
   margin-bottom: 100px;
 }
 
-.doctor-list h1 {
+.approval-list h1 {
   color: #171717;
   font-size: 45px;
   font-weight: 600;
   margin-bottom: 20px; /* Add margin-bottom to create space below the heading */
 }
 
-.doctor-list hr {
+.approval-list hr {
   width: 100%;
   max-width: 200px; /* Adjust max-width as needed */
   height: 6px;
@@ -27,15 +27,27 @@
   margin-bottom: 20px; /* Add margin-bottom to create space below the hr */
 }
 
-.doctor-item {
+.approve-item {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-top: 50px;
   gap: 30px;
 }
 
-.doctor-item > * {
+.approve-item > * {
   border: 2px solid #171717; /* Set border style, color, and width */
   border-radius: 20px; /* Set border radius */
   padding: 20px;
+}
+
+.approve-item button {
+  margin-top: 10px;
+  margin-left: 50px;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
