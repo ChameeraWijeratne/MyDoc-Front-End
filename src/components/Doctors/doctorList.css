@@ -35,7 +35,10 @@
 }
 
 .doctor-item > * {
-  border: 2px solid #171717; /* Set border style, color, and width */
+  border: 2px solid lightskyblue; /* Set border style, color, and width */
   border-radius: 20px; /* Set border radius */
   padding: 20px;
+  background-image: url('../../assest/data/images/BackgroundCard.jpg');
+  background-size: cover;
+  background-position: center;
 }

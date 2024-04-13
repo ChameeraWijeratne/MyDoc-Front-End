@@ -42,7 +42,7 @@ export const ApprovalItem = (props) => {
   const memoizedDocumentUrl = useMemo(() => docUrl, [docUrl]);
 
   return (
-    <div className="item-doc">
+    <div className="approve-doc">
       <img src={memoizedImageUrl || defaultImg} alt="" />
       <p>{props.name}</p>
       <p>{props.category}</p>

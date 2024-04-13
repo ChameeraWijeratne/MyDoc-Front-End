@@ -56,7 +56,7 @@ export const DoctorList = () => {
             <DoctorItem
               key={i}
               id={item._id}
-              name={item.firstName + ' ' + item.lastName}
+              name={'Dr. ' + item.firstName + ' ' + item.lastName}
               image={item.profilePic}
               category={item.doctorCategory + ' (MBBS ' + item.mbbsId + ')'}
               city={item.city}

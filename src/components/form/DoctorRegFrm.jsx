@@ -225,7 +225,7 @@ export default function DoctorRegFrm() {
       setNicBirthday(`${getFormattedDate(birthday)}`);
       setFormData({
         ...formData,
-        birthday: `${getFormattedDate(birthday)}`,
+        birthday: nicBirthday,
       });
       setNicGender(`${gender}`);
       setFormData({
@@ -610,11 +610,12 @@ export default function DoctorRegFrm() {
                 />
               </div>
               <div className="input-field">
-                <label>MBBS Certificate</label>
+                <label>MBBS Certificate (*.Pdf Format)</label>
                 <input
                   type="file"
                   name="mbbsCertificate"
                   onChange={handleCertificateImageChange}
+                  placeholder="Only PDF"
                 />
               </div>
               <div className="input-field">
