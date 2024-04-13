@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './approvalsList.css';
 import { ApprovalItem } from '../ui/ApproveItem/ApprovalItem';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export const ApprovalList = () => {
   const [approvalData, setApprovalData] = useState([]);
@@ -27,20 +28,46 @@ export const ApprovalList = () => {
   );
 
   const handleApprove = async (id) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to approve this doctor?'
-    );
-
-    if (confirmed) {
-      try {
-        const response1 = await axios.post(
-          `http://localhost:8080/api/v1/doctor/activate/${id}`
-        ); // Adjust the route based on your backend setup
-        console.log(`Approving doctor with ID ${id}`, response1.data);
-      } catch (error) {
-        console.error('Error approving doctor data:', error);
+    Swal.fire({
+      title: 'Do you want to approve this doctor?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response1 = await axios.post(
+            `http://localhost:8080/api/v1/doctor/activate/${id}`
+          ); // Adjust the route based on your backend setup
+          console.log(`Approving doctor with ID ${id}`, response1.data);
+          Swal.fire('Approved!', '', 'success');
+        } catch (error) {
+          console.error('Error approving doctor data:', error);
+        }
       }
-    }
+    });
+  };
+
+  const handleDecline = async (id) => {
+    Swal.fire({
+      title: 'Do you want to decline this doctor?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        try {
+          const response1 = await axios.delete(
+            `http://localhost:8080/api/v1/doctor/delete/${id}`
+          ); // Adjust the route based on your backend setup
+          console.log(`Deleting doctor with ID ${id}`, response1.data);
+          Swal.fire('Declined!', '', 'info');
+        } catch (error) {
+          console.error('Error Deleting doctor data:', error);
+        }
+      }
+    });
   };
 
   return (
@@ -60,7 +87,15 @@ export const ApprovalList = () => {
                 city={item.city}
                 certificate={item.mbbsCertificate}
               />
-              <button onClick={() => handleApprove(item._id)}>Approve</button>
+              <div className="btn">
+                <button onClick={() => handleApprove(item._id)}>Approve</button>
+                <button
+                  className="btnCancel"
+                  onClick={() => handleDecline(item._id)}
+                >
+                  Decline
+                </button>
+              </div>
             </div>
           );
         })}
