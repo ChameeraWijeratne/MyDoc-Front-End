@@ -1,13 +1,12 @@
 import './home.css';
 import Topbar from '../../components/ui/topbar/Topbar';
+import Hero from '../../components/ui/Hero/Hero';
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Topbar />
-      <div className="homeContent">
-        <div className="homeBody"></div>
-      </div>
-    </>
+      <Hero />
+    </div>
   );
 }
