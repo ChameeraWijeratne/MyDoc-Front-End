@@ -1,5 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './AuthContext';
+import PrivateRoute from './PrivateRoute';
+
 import './App.css';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
@@ -11,18 +14,33 @@ import Approvals from './pages/Approvals/Approvals';
 
 function App() {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/signup" element={<Register />} />
-    //     <Route path="/userreg" element={<UserReg />} />
-    //     <Route path="/docreg" element={<DoctorReg />} />
-    //     <Route path="/doctors" element={<Doctors />} />
-    //     <Route path="/approvals" element={<Approvals />} />
-    //   </Routes>
-    // </Router>
-
-<Login/>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/doctors"
+            element={
+              <PrivateRoute>
+                <Doctors />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/approvals"
+            element={
+              <PrivateRoute>
+                <Approvals />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/userreg" element={<UserReg />} />
+          <Route path="/docreg" element={<DoctorReg />} />
+          <Route path="/signup" element={<Register />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 }
 

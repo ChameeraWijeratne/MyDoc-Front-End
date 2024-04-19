@@ -71,3 +71,8 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.btnLogout {
+  background-color: var(--topbar-color);
+  font-size: 15px;
+}

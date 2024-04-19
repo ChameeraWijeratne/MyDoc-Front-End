@@ -6,11 +6,9 @@ export default function Approvals() {
   return (
     <>
       <Topbar />
-      <div className="homeContent">
-        <div className="homeBody">
-          <div className="approvalList">
-            <ApprovalList />
-          </div>
+      <div className="approveContent">
+        <div className="approvalList">
+          <ApprovalList />
         </div>
       </div>
     </>
