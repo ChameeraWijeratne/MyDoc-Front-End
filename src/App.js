@@ -8,8 +8,10 @@ import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import Register from './pages/Signup/Signup';
 import DoctorReg from './pages/DoctorReg/DoctorReg';
+import AppontmentReg from './pages/AppointmentReg/AppointmentReg';
 import UserReg from './pages/UserReg/UserReg';
 import Doctors from './pages/Doctors/Doctors';
+import DoctorView from './pages/DoctorView/DoctorView';
 import Approvals from './pages/Approvals/Approvals';
 
 function App() {
@@ -33,10 +35,26 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/doctor-details/:id"
+            element={
+              <PrivateRoute>
+                <DoctorView />
+              </PrivateRoute>
+            }
+          />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/userreg" element={<UserReg />} />
           <Route path="/docreg" element={<DoctorReg />} />
+          <Route
+            path="/appointmentreg"
+            element={
+              <PrivateRoute>
+                <AppontmentReg />
+              </PrivateRoute>
+            }
+          />
           <Route path="/signup" element={<Register />} />
         </Routes>
       </AuthProvider>

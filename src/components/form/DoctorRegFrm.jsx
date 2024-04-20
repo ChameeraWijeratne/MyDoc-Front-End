@@ -489,7 +489,7 @@ export default function DoctorRegFrm() {
               <div className="input-field">
                 <label>Birth Day</label>
                 <input
-                  type="text"
+                  type="Date"
                   value={nicBirthday}
                   onChange={(e) =>
                     setFormData({ ...formData, birthday: nicBirthday })

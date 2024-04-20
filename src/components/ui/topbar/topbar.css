@@ -75,4 +75,12 @@ a {
 .btnLogout {
   background-color: var(--topbar-color);
   font-size: 15px;
+  transition: 0.6s;
+}
+
+.btnLogout:hover {
+  background-color: black;
+  color: var(--topbar-color);
+  font-size: 15px;
+  transition: 0.6s;
 }

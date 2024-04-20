@@ -3,6 +3,7 @@ import './doctorItem.css';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { imageDb } from '../../form/Config';
 import defaultImg from '../../../assest/data/images/default.jpg';
+import { Link } from 'react-router-dom';
 
 export const DoctorItem = (props) => {
   const [imageUrl, setImageUrl] = useState(null);
@@ -30,6 +31,7 @@ export const DoctorItem = (props) => {
       <p>{props.name}</p>
       <p>{props.category}</p>
       <p style={{ color: 'red' }}>{props.city}</p>
+      <Link to={`/doctor-details/${props.id}`}>Show Profile</Link>
     </div>
   );
 };
