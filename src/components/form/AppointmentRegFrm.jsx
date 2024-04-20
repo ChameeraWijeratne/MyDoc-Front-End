@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
+import { useResponseId } from '../../ResponseIdContext';
+
 import axios from 'axios';
 import './userRegFrm.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,14 +15,20 @@ import Logo from './../../assest/data/images/Logo.png';
 />;
 
 export default function AppointmentRegFrm() {
+  const { id } = useParams();
+  const { responseId } = useResponseId();
+
   const [formData, setFormData] = useState({
-    doctorId: '',
-    patientId: '',
+    docId: id || '',
+    userId: responseId || '',
     patientName: '',
-    date: '',
-    time: '',
+    appointmentDate: '',
+    appointmentTime: '',
     description: '',
+    rating: 0,
   });
+
+  console.log(responseId);
 
   const handleSubmit = async (event) => {
     // Your existing submission logic...
@@ -84,7 +93,7 @@ export default function AppointmentRegFrm() {
       <img className="user-img" src={Logo} alt="" />
       <header className="user-header">Appointment Registration</header>
       <ToastContainer />
-      <form onSubmit={handleSubmit} action="#">
+      <form onSubmit={handleSubmit}>
         <div className="user-form form first">
           <div className="details personal">
             <div className="fields">
@@ -102,9 +111,12 @@ export default function AppointmentRegFrm() {
                   type="date"
                   id="appointmentDate" // Add id for targeting
                   placeholder="Appontment Date"
-                  value={formData.date}
+                  value={formData.appointmentDate}
                   onChange={(e) =>
-                    setFormData({ ...formData, date: e.target.value })
+                    setFormData({
+                      ...formData,
+                      appointmentDate: e.target.value,
+                    })
                   }
                   required
                 />
@@ -112,9 +124,12 @@ export default function AppointmentRegFrm() {
                   className="appontmentTimeSelec"
                   type="text"
                   placeholder="Time"
-                  value={formData.time}
+                  value={formData.appointmentTime}
                   onChange={(e) =>
-                    setFormData({ ...formData, time: e.target.value })
+                    setFormData({
+                      ...formData,
+                      appointmentTime: e.target.value,
+                    })
                   }
                   required
                 >
@@ -137,7 +152,6 @@ export default function AppointmentRegFrm() {
             </div>
           </div>
         </div>
-        {/* Repeat similar structures for other input fields */}
         <div className="user-form form fourth">
           <div className="details submit">
             <div className="fields">

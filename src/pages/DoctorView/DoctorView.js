@@ -12,6 +12,10 @@ const DoctorDetails = () => {
   const { id } = useParams();
   const [doctor, setDoctor] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [appointments, setAppointments] = useState([]);
+  const [filteredAppointments, setFilteredAppointments] = useState([]);
+  const [dateFilter, setDateFilter] = useState('');
+  const [timeFilter, setTimeFilter] = useState('');
 
   useEffect(() => {
     // Fetch doctor details using the ID
@@ -30,13 +34,66 @@ const DoctorDetails = () => {
           ref(imageDb, `files/ProPics/${doctorData.profilePic}`)
         );
         setImageUrl(url);
+
+        const appointmentResponse = await axios.get(
+          `http://localhost:8080/api/v1/appointment/getAll`
+        );
+        setAppointments(appointmentResponse.data);
       } catch (error) {
         console.error('Error fetching doctor details:', error);
       }
     };
 
     fetchDoctorDetails();
+    setDateFilter(getTodayDate());
   }, [id]);
+
+  const handleDateChange = (e) => {
+    setDateFilter(e.target.value);
+  };
+
+  // Function to handle time filter change
+  const handleTimeChange = (e) => {
+    setTimeFilter(e.target.value);
+  };
+
+  useEffect(() => {
+    let filtered = appointments;
+    if (dateFilter) {
+      filtered = filtered.filter(
+        (appointment) => appointment.appointmentDate === dateFilter
+      );
+    }
+    if (timeFilter) {
+      filtered = filtered.filter(
+        (appointment) => appointment.appointmentTime === timeFilter
+      );
+    }
+    setFilteredAppointments(filtered);
+  }, [appointments, dateFilter, timeFilter]);
+
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const generateDateOptions = () => {
+    const options = [];
+    for (let i = 0; i < 7; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() + i);
+      const formattedDate = date.toISOString().split('T')[0];
+      options.push(
+        <option key={formattedDate} value={formattedDate}>
+          {formattedDate}
+        </option>
+      );
+    }
+    return options;
+  };
 
   if (!doctor) {
     return <div>Loading...</div>;
@@ -60,13 +117,46 @@ const DoctorDetails = () => {
             {doctor.addressLine1}, {doctor.addressLine2}, {doctor.city} (
             {doctor.postalCode})
           </p>
-          <Link to={`/appointmentreg`}>
+          <Link to={`/appointmentreg/${id}`}>
             <button className="appontmentButton">Add Appointment</button>
           </Link>
         </div>
       </div>
+      <div className="filterDateandTime">
+        <select value={dateFilter} onChange={handleDateChange}>
+          {generateDateOptions()}
+        </select>
 
-      {/* Display other doctor details as needed */}
+        <select value={timeFilter} onChange={handleTimeChange}>
+          <option value="8.00AM" selected>
+            8.00 AM
+          </option>
+          <option value="4.00PM">4.00 PM</option>
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Patient Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredAppointments.map((appointment, index) => (
+            <tr key={appointment.id}>
+              <td>{index + 1}</td>
+              <td>{appointment.appointmentDate}</td>
+              <td>{appointment.appointmentTime}</td>
+              <td>{appointment.patientName}</td>
+              <td>{appointment.description}</td>
+              {/* Add more table cells for other appointment details */}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

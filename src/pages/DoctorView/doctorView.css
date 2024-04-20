@@ -53,3 +53,88 @@
   border-radius: 5px;
   transition: 0.4s;
 }
+
+table {
+  width: 800px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: 350px;
+}
+
+/* CSS for table header */
+thead th {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* CSS for table body */
+tbody td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* CSS for alternating row colors */
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* CSS for row count */
+tbody td:first-child {
+  width: 40px; /* Adjust width as needed */
+}
+
+/* Optional: Hover effect */
+tbody tr:hover {
+  background-color: #e6f7ff;
+}
+
+.filterDateandTime {
+  margin-left: 850px;
+}
+
+.filterDateandTime select {
+  padding: 12px 20px;
+  margin-left: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Style for select dropdown arrow icon */
+.filterDateandTime::after {
+  content: '\25BC'; /* Unicode for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+/* Style for select dropdown options */
+.filterDateandTime select option {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Style for select dropdown when hovered */
+.filterDateandTime select:hover {
+  background-color: var(--hero-container);
+  color: #fff;
+  transition: 0.4s;
+}
+
+/* Style for select dropdown when focused */
+.filterDateandTime select:focus {
+  border-color: #007bff; /* Change border color on focus */
+}

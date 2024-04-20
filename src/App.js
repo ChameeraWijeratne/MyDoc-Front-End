@@ -13,6 +13,7 @@ import UserReg from './pages/UserReg/UserReg';
 import Doctors from './pages/Doctors/Doctors';
 import DoctorView from './pages/DoctorView/DoctorView';
 import Approvals from './pages/Approvals/Approvals';
+import MyAppointments from './pages/MyAppointments/MyAppointments';
 
 function App() {
   return (
@@ -48,10 +49,18 @@ function App() {
           <Route path="/userreg" element={<UserReg />} />
           <Route path="/docreg" element={<DoctorReg />} />
           <Route
-            path="/appointmentreg"
+            path="/appointmentreg/:id"
             element={
               <PrivateRoute>
                 <AppontmentReg />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/myappointments"
+            element={
+              <PrivateRoute>
+                <MyAppointments />
               </PrivateRoute>
             }
           />

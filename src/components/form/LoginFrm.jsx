@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useAuth } from '../../../src/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { useResponseId } from '../../../src/ResponseIdContext';
 
 import './loginFrm.css';
 import { FaLock } from 'react-icons/fa';
@@ -15,6 +16,7 @@ export const LoginFrm = () => {
   const [userType, setUserType] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { login, setAdmin } = useAuth();
+  const { setGlobalResponseId } = useResponseId();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ export const LoginFrm = () => {
           password,
         }
       );
+
       if (response.status === 200) {
         toast.success('Login successfully!', {
           position: 'top-right',
@@ -42,6 +45,14 @@ export const LoginFrm = () => {
           pauseOnHover: true,
           draggable: true,
         });
+
+        const response1 = await axios.post(
+          tableName === 'doctor'
+            ? `http://localhost:8080/api/v1/doctor/searchDoctorByEmail/${email}`
+            : `http://localhost:8080/api/v1/user/searchUserByEmail/${email}`
+        );
+        setGlobalResponseId(response1.data);
+        console.log('Response UserID data:', response1.data);
 
         login();
         setIsLoggedIn(true);
