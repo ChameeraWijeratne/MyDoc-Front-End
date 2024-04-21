@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useResponseId } from '../../ResponseIdContext';
 
 import axios from 'axios';
@@ -17,6 +17,7 @@ import Logo from './../../assest/data/images/Logo.png';
 export default function AppointmentRegFrm() {
   const { id } = useParams();
   const { responseId } = useResponseId();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     docId: id || '',
@@ -42,15 +43,7 @@ export default function AppointmentRegFrm() {
 
       // Handle the response from the backend
       console.log(response.data);
-
-      toast.success('Appointment submitted successfully!', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      navigate('/myappointments');
 
       // Redirect or do other actions after successful submission
     } catch (error) {
@@ -93,7 +86,7 @@ export default function AppointmentRegFrm() {
       <img className="user-img" src={Logo} alt="" />
       <header className="user-header">Appointment Registration</header>
       <ToastContainer />
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="user-form form first">
           <div className="details personal">
             <div className="fields">
@@ -156,7 +149,7 @@ export default function AppointmentRegFrm() {
           <div className="details submit">
             <div className="fields">
               <div className="input-field user-input-field"></div>
-              <button className="nextBtn user-frm-btn" type="submit">
+              <button className="nextBtn user-frm-btn" onClick={handleSubmit}>
                 <span className="btnText">Register</span>
               </button>
             </div>

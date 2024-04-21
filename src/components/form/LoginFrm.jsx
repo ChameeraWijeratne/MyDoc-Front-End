@@ -4,6 +4,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useAuth } from '../../../src/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { useResponseId } from '../../../src/ResponseIdContext';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { imageDb } from '../../components/form/Config';
+import defaultImg from '../../assest/data/images/default.jpg';
 
 import './loginFrm.css';
 import { FaLock } from 'react-icons/fa';
@@ -51,7 +54,21 @@ export const LoginFrm = () => {
             ? `http://localhost:8080/api/v1/doctor/searchDoctorByEmail/${email}`
             : `http://localhost:8080/api/v1/user/searchUserByEmail/${email}`
         );
-        setGlobalResponseId(response1.data);
+
+        if (tableName === 'doctor') {
+          const responseDoc = await axios.post(
+            `http://localhost:8080/api/v1/doctor/search/${response1.data}`
+          );
+
+          const url = await getDownloadURL(
+            ref(imageDb, `files/ProPics/${responseDoc.data.profilePic}`)
+          );
+          setGlobalResponseId(responseDoc.data._id, userType, url);
+        } else {
+          const url = { defaultImg };
+          setGlobalResponseId(response1.data, userType, url);
+        }
+
         console.log('Response UserID data:', response1.data);
 
         login();

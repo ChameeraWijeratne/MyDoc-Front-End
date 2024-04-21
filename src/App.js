@@ -13,7 +13,8 @@ import UserReg from './pages/UserReg/UserReg';
 import Doctors from './pages/Doctors/Doctors';
 import DoctorView from './pages/DoctorView/DoctorView';
 import Approvals from './pages/Approvals/Approvals';
-import MyAppointments from './pages/MyAppointments/MyAppointments';
+import MyAppointmentsPage from './pages/MyAppointments/MyAppointmentsPage';
+import MyProfile from './pages/MyProfile/MyProfile';
 
 function App() {
   return (
@@ -57,10 +58,18 @@ function App() {
             }
           />
           <Route
+            path="/myProfile"
+            element={
+              <PrivateRoute>
+                <MyProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/myappointments"
             element={
               <PrivateRoute>
-                <MyAppointments />
+                <MyAppointmentsPage />
               </PrivateRoute>
             }
           />

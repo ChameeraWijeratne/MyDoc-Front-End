@@ -11,7 +11,7 @@
 }
 
 .doctorDetails img {
-  max-width: 300px; /* Adjust the max-width as needed */
+  max-width: 260px; /* Adjust the max-width as needed */
   margin: 20px 40px 20px 30px; /* Space between image and details */
   border-radius: 25px;
 }
@@ -137,4 +137,15 @@ tbody tr:hover {
 /* Style for select dropdown when focused */
 .filterDateandTime select:focus {
   border-color: #007bff; /* Change border color on focus */
+}
+
+.doctorDetailsData-left span {
+  color: red;
+  border-color: #333;
+  width: 6px;
+}
+
+.doctorDetailsData-left p {
+  margin-top: -10px;
+  margin-left: 45px;
 }

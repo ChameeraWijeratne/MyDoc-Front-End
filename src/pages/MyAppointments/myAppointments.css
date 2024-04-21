@@ -1,0 +1,82 @@
+@import url('../../assest/data/colors.css');
+
+.my-appointments h1 {
+  margin: 20px 20px 60px 600px;
+}
+
+.appointment-details {
+  background-color: bisque;
+  display: flex;
+  margin: 20px 20px 20px 300px;
+  border-radius: 25px;
+  width: 60%;
+}
+
+.appointment-details-right {
+  margin: 20px 20px 20px 20px;
+}
+
+.appointment-details-right img {
+  width: 300px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.appointment-details-left {
+  margin: 20px 20px 20px 20px;
+}
+
+.btnMyAppointment {
+  display: flex;
+  margin-left: 100px;
+}
+
+.myAppointmentButton {
+  width: 150px;
+  margin-left: 20px;
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border: 3px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
+  transition: 0.4s;
+}
+
+.myAppointmentButton:hover {
+  background-color: white;
+  color: red;
+  border: 3px solid red;
+  border-radius: 5px;
+  transition: 0.4s;
+}
+
+.ratingbtn {
+  background-color: green;
+  color: white;
+  border: 3px solid white;
+}
+
+.ratingbtn:hover {
+  background-color: white;
+  color: green;
+  border: 3px solid green;
+}
+
+.numberData {
+  text-align: center;
+  margin-top: -250px;
+  margin-left: 300px;
+  margin-bottom: 240px;
+}
+.numberData p {
+  background-color: #f9a825;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 200px;
+}

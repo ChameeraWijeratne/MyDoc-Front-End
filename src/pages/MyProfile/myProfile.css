@@ -1,0 +1,13 @@
+.user-details {
+  background-color: bisque;
+  margin: 40px 20px 40px 450px;
+  border-radius: 20px;
+  width: 40%;
+  display: flex;
+}
+
+.user-details-right img {
+  width: 100px;
+  margin: 30px 30px 30px 30px;
+  border-radius: 50px;
+}

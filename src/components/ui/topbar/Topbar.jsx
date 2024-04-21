@@ -4,9 +4,11 @@ import { useAuth } from '.././../../AuthContext';
 
 import './topbar.css';
 import { AccountCircle, CircleNotifications } from '@mui/icons-material';
+import { useResponseId } from '../../../ResponseIdContext';
 
 export default function Topbar() {
   const { isLoggedIn, isAdmin, logout } = useAuth();
+  const { propicUrl } = useResponseId();
 
   return (
     <div className="topbarContainer">
@@ -82,7 +84,13 @@ export default function Topbar() {
           )}
           <div className="topbarIcons">
             <div className="topbarIconItem">
-              <AccountCircle />
+              <Link to="/myProfile">
+                {propicUrl ? (
+                  <img src={propicUrl} alt="Profile" />
+                ) : (
+                  <AccountCircle />
+                )}{' '}
+              </Link>
             </div>
             <div className="topbarIconItem">
               <CircleNotifications />

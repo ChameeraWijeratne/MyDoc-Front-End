@@ -16,6 +16,7 @@ const DoctorDetails = () => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [dateFilter, setDateFilter] = useState('');
   const [timeFilter, setTimeFilter] = useState('');
+  const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
     // Fetch doctor details using the ID
@@ -39,6 +40,7 @@ const DoctorDetails = () => {
           `http://localhost:8080/api/v1/appointment/getAll`
         );
         setAppointments(appointmentResponse.data);
+        calculateAverageRating(id);
       } catch (error) {
         console.error('Error fetching doctor details:', error);
       }
@@ -95,6 +97,17 @@ const DoctorDetails = () => {
     return options;
   };
 
+  const calculateAverageRating = async (doctorId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/appointment/averageRating/${doctorId}`
+      );
+      setAverageRating(response.data);
+    } catch (error) {
+      console.error('Error calculating average rating:', error);
+    }
+  };
+
   if (!doctor) {
     return <div>Loading...</div>;
   }
@@ -103,7 +116,16 @@ const DoctorDetails = () => {
     <div>
       <Topbar />
       <div className="doctorDetails">
-        <img src={imageUrl || defaultImg} alt="Doctor" />
+        <div className="doctorDetailsData-left">
+          <img src={imageUrl || defaultImg} alt="Doctor" />
+          <p>
+            Average Rating :{' '}
+            {Array.from({ length: Math.round(averageRating) }, (_, index) => (
+              <span key={index}>★</span>
+            ))}{' '}
+            ({averageRating})
+          </p>
+        </div>
         <div className="doctorDetailsData">
           <h2>
             Dr. {doctor.firstName} {doctor.lastName}
@@ -117,6 +139,7 @@ const DoctorDetails = () => {
             {doctor.addressLine1}, {doctor.addressLine2}, {doctor.city} (
             {doctor.postalCode})
           </p>
+
           <Link to={`/appointmentreg/${id}`}>
             <button className="appontmentButton">Add Appointment</button>
           </Link>
