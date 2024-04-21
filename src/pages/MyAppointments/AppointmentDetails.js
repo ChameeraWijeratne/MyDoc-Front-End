@@ -20,20 +20,27 @@ const AppointmentDetails = ({ appointment }) => {
         );
         const fetchedDoctor = response1.data;
         console.log(response1.data);
+        console.log(appointment._id);
+        console.log(appointment.docId);
+        console.log(appointment.userId);
+        console.log(appointment.appointmentDate);
+        console.log(appointment.appointmentTime);
 
         const responseIndex = await axios.get(
           `http://localhost:8080/api/v1/appointment/getIndex`,
           {
             params: {
               Id: appointment._id,
+              docId: appointment.docId,
               userId: appointment.userId,
-              docId: appointment.userId,
               appointmentDate: appointment.appointmentDate,
               appointmentTime: appointment.appointmentTime,
             },
           }
         );
+
         setIndex(responseIndex.data);
+        console.log(responseIndex.data);
 
         if (fetchedDoctor) {
           setDoctor(fetchedDoctor);

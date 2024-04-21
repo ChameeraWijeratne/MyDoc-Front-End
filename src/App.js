@@ -50,14 +50,6 @@ function App() {
           <Route path="/userreg" element={<UserReg />} />
           <Route path="/docreg" element={<DoctorReg />} />
           <Route
-            path="/appointmentreg/:id"
-            element={
-              <PrivateRoute>
-                <AppontmentReg />
-              </PrivateRoute>
-            }
-          />
-          <Route
             path="/myProfile"
             element={
               <PrivateRoute>
@@ -70,6 +62,14 @@ function App() {
             element={
               <PrivateRoute>
                 <MyAppointmentsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/appointmentreg/:id"
+            element={
+              <PrivateRoute>
+                <AppontmentReg />
               </PrivateRoute>
             }
           />

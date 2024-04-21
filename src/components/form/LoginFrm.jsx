@@ -65,8 +65,7 @@ export const LoginFrm = () => {
           );
           setGlobalResponseId(responseDoc.data._id, userType, url);
         } else {
-          const url = { defaultImg };
-          setGlobalResponseId(response1.data, userType, url);
+          setGlobalResponseId(response1.data, userType, defaultImg);
         }
 
         console.log('Response UserID data:', response1.data);

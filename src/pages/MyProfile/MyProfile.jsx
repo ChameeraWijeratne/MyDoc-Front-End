@@ -41,7 +41,7 @@ export default function myProfile() {
             <div className="user-details-All">
               <div className="user-details">
                 <div className="user-details-right">
-                  <img src={defaultImg} alt="Doctor" />
+                  <img src={defaultImg} alt="User" />
                 </div>
                 <div className="user-details-left">
                   <h2>{user.username}</h2>

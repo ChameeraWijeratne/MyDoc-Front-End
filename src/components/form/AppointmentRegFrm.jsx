@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useResponseId } from '../../ResponseIdContext';
 
@@ -14,7 +14,7 @@ import Logo from './../../assest/data/images/Logo.png';
   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 />;
 
-export default function AppointmentRegFrm() {
+export const AppointmentRegFrm = () => {
   const { id } = useParams();
   const { responseId } = useResponseId();
   const navigate = useNavigate();
@@ -32,9 +32,8 @@ export default function AppointmentRegFrm() {
   console.log(responseId);
 
   const handleSubmit = async (event) => {
-    // Your existing submission logic...
+    event.preventDefault();
 
-    // Add appointment submission logic here
     try {
       const response = await axios.post(
         'http://localhost:8080/api/v1/appointment/save',
@@ -44,8 +43,6 @@ export default function AppointmentRegFrm() {
       // Handle the response from the backend
       console.log(response.data);
       navigate('/myappointments');
-
-      // Redirect or do other actions after successful submission
     } catch (error) {
       console.error('Error submitting appointment:', error);
       toast.error('Error submitting appointment. Please try again later.', {
@@ -85,8 +82,7 @@ export default function AppointmentRegFrm() {
     <div className="container user-reg-container">
       <img className="user-img" src={Logo} alt="" />
       <header className="user-header">Appointment Registration</header>
-      <ToastContainer />
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="user-form form first">
           <div className="details personal">
             <div className="fields">
@@ -149,7 +145,7 @@ export default function AppointmentRegFrm() {
           <div className="details submit">
             <div className="fields">
               <div className="input-field user-input-field"></div>
-              <button className="nextBtn user-frm-btn" onClick={handleSubmit}>
+              <button className="nextBtn user-frm-btn" type="submit">
                 <span className="btnText">Register</span>
               </button>
             </div>
@@ -158,4 +154,6 @@ export default function AppointmentRegFrm() {
       </form>
     </div>
   );
-}
+};
+
+export default AppointmentRegFrm;
