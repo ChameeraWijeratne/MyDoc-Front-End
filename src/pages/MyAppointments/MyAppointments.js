@@ -25,13 +25,12 @@ export default function MyAppointments() {
     fetchData();
   }, [responseId]);
 
-  const currentDate = new Date();
-
-  // Filter appointments based on the appointment date being after or equal to the current date
   const filteredAppointments = Array.isArray(appointments)
     ? appointments.filter((appointment) => {
         const appointmentDate = new Date(appointment.appointmentDate);
-        return appointmentDate >= currentDate;
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        return appointmentDate > yesterday;
       })
     : [];
 

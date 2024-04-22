@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import './myProfile.css';
 import { useState, useEffect } from 'react';
-import defaultImg from '../../assest/data/images/default.jpg';
+import defaultImg from '../../assest/data/images/default1.jpg';
 import MyAppointments from '../MyAppointments/MyAppointments';
 
 export default function myProfile() {

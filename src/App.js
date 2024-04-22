@@ -15,6 +15,7 @@ import DoctorView from './pages/DoctorView/DoctorView';
 import Approvals from './pages/Approvals/Approvals';
 import MyAppointmentsPage from './pages/MyAppointments/MyAppointmentsPage';
 import MyProfile from './pages/MyProfile/MyProfile';
+import ConfirmPage from '../src/components/confirmation/Confirmation';
 
 function App() {
   return (
@@ -70,6 +71,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AppontmentReg />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/appointmentConfirm"
+            element={
+              <PrivateRoute>
+                <ConfirmPage />
               </PrivateRoute>
             }
           />

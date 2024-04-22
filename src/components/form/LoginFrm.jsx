@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 import { useResponseId } from '../../../src/ResponseIdContext';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { imageDb } from '../../components/form/Config';
-import defaultImg from '../../assest/data/images/default.jpg';
+import defaultImg from '../../assest/data/images/default1.jpg';
 
 import './loginFrm.css';
 import { FaLock } from 'react-icons/fa';

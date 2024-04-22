@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import defaultImg from '../../assest/data/images/default.jpg';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { imageDb } from '../../components/form/Config';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 import './myAppointments.css';
 import Swal from 'sweetalert2';
@@ -10,6 +12,7 @@ const AppointmentDetails = ({ appointment }) => {
   const [doctor, setDoctor] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [index, setIndex] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDoctorDetails = async () => {
@@ -89,6 +92,7 @@ const AppointmentDetails = ({ appointment }) => {
           ); // Adjust the route based on your backend setup
           console.log(`Deleting doctor with ID ${id}`, response1.data);
           Swal.fire('Deleted!', '', 'info');
+          navigate('/doctors');
         } catch (error) {
           console.error('Error Deleting doctor data:', error);
         }

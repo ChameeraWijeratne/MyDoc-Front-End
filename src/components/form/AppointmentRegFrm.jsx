@@ -42,7 +42,7 @@ export const AppointmentRegFrm = () => {
 
       // Handle the response from the backend
       console.log(response.data);
-      navigate('/myappointments');
+      navigate('/appointmentConfirm');
     } catch (error) {
       console.error('Error submitting appointment:', error);
       toast.error('Error submitting appointment. Please try again later.', {
