@@ -37,7 +37,7 @@ const DoctorDetails = () => {
         setImageUrl(url);
 
         const appointmentResponse = await axios.get(
-          `http://localhost:8080/api/v1/appointment/getAll`
+          `http://localhost:8080/api/v1/appointment/searchDocAppointments/${id}`
         );
         setAppointments(appointmentResponse.data);
         calculateAverageRating(id);

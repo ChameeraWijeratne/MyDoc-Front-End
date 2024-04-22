@@ -16,7 +16,7 @@ import Logo from './../../assest/data/images/Logo.png';
 
 export const AppointmentRegFrm = () => {
   const { id } = useParams();
-  const { responseId } = useResponseId();
+  const { responseId, userType } = useResponseId();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -40,7 +40,63 @@ export const AppointmentRegFrm = () => {
         formData
       );
 
-      // Handle the response from the backend
+      const responseDoc = await axios.get(
+        `http://localhost:8080/api/v1/doctor/search/${id}`
+      );
+
+      let responseUser;
+      if (userType === 'doctor') {
+        responseUser = await axios.get(
+          `http://localhost:8080/api/v1/doctor/search/${formData.userId}`
+        );
+      } else {
+        responseUser = await axios.get(
+          `http://localhost:8080/api/v1/user/search/${formData.userId}`
+        );
+      }
+      console.log(responseUser.data);
+
+      const userData = responseUser.data;
+      const email = userData.email;
+
+      const responseAppointmentNo = await axios.get(
+        `http://localhost:8080/api/v1/appointment/getIndex`,
+        {
+          params: {
+            Id: response.data,
+            docId: id,
+            userId: responseId,
+            appointmentDate: formData.appointmentDate,
+            appointmentTime: formData.appointmentTime,
+          },
+        }
+      );
+
+      const appNo = responseAppointmentNo.data;
+      const appDate = formData.appointmentDate;
+      const appTime = formData.appointmentTime;
+      const appDesc = formData.description;
+      const doc = responseDoc.data;
+      const docFname = doc.firstName;
+      const docLname = doc.lastName;
+
+      const emailData = {
+        to: email,
+        docFname: docFname,
+        docLname: docLname,
+        appNo: appNo,
+        appDate: appDate,
+        appTime: appTime,
+        appDesc: appDesc,
+      };
+
+      const responseMail = await axios.post(
+        `http://localhost:8080/api/v1/email/sendAppConfirmEmail`,
+        emailData
+      );
+
+      console.log(responseMail.data);
+
       console.log(response.data);
       navigate('/appointmentConfirm');
     } catch (error) {
