@@ -15,7 +15,7 @@ export const ApprovalList = () => {
     try {
       const response = await axios.get(
         'http://localhost:8080/api/v1/doctor/getAll'
-      ); // Adjust the route based on your backend setup
+      );
       setApprovalData(response.data);
       console.log('Response data :', response.data);
     } catch (error) {
@@ -36,11 +36,33 @@ export const ApprovalList = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          const docData = await axios.get(
+            `http://localhost:8080/api/v1/doctor/search/${id}`
+          );
+
+          const doc = docData.data;
+
           const response1 = await axios.post(
             `http://localhost:8080/api/v1/doctor/activate/${id}`
-          ); // Adjust the route based on your backend setup
+          );
           console.log(`Approving doctor with ID ${id}`, response1.data);
           Swal.fire('Approved!', '', 'success');
+          const emailData = {
+            to: doc.email,
+            docFname: doc.firstName,
+            docLname: doc.lastName,
+            appNo: null,
+            appDate: null,
+            appTime: null,
+            appDesc: 'Congaratulations!!!! , Your Account Approved.',
+          };
+
+          const responseMail = await axios.post(
+            `http://localhost:8080/api/v1/email/sendApprovalEmail`,
+            emailData
+          );
+
+          console.log(responseMail.data);
         } catch (error) {
           console.error('Error approving doctor data:', error);
         }
@@ -55,14 +77,37 @@ export const ApprovalList = () => {
       confirmButtonText: 'Yes',
       denyButtonText: 'No',
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         try {
+          const docData = await axios.get(
+            `http://localhost:8080/api/v1/doctor/search/${id}`
+          );
+
+          const doc = docData.data;
+
           const response1 = await axios.delete(
             `http://localhost:8080/api/v1/doctor/delete/${id}`
-          ); // Adjust the route based on your backend setup
+          );
           console.log(`Deleting doctor with ID ${id}`, response1.data);
           Swal.fire('Declined!', '', 'info');
+
+          const emailData = {
+            to: doc.email,
+            docFname: doc.firstName,
+            docLname: doc.lastName,
+            appNo: null,
+            appDate: null,
+            appTime: null,
+            appDesc:
+              'Your Account Declined, Please add correct informations and Register again.',
+          };
+
+          const responseMail = await axios.post(
+            `http://localhost:8080/api/v1/email/sendApprovalEmail`,
+            emailData
+          );
+
+          console.log(responseMail.data);
         } catch (error) {
           console.error('Error Deleting doctor data:', error);
         }

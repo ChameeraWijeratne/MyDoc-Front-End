@@ -660,7 +660,7 @@ export default function DoctorRegFrm() {
                 </div>
                 <span className="pwordErrorMsg">
                   {!isPasswordValid && (
-                    <p style={{ color: 'red' }}>Password is Invalid</p>
+                    <p style={{ color: 'red' }}>Password must be Advanced.</p>
                   )}
                   {passwordError && isPasswordValid && (
                     <p style={{ color: 'red' }}>{passwordError}</p>

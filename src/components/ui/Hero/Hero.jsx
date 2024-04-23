@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './hero.css';
-import heroImg1 from '../../../assest/data/images/hero-1.png';
+//import heroImg1 from '../../../assest/data/images/hero-1.png';
+import heroVid1 from '../../../assest/data/images/heroVid-1.mp4';
 
 const Hero = () => {
   return (
@@ -37,7 +38,9 @@ const Hero = () => {
 
         <div className="hero-right">
           <div className="image-container">
-            <img src={heroImg1} alt="" />
+            <video controls width="700" muted autoPlay loop>
+              <source src={heroVid1} type="video/mp4" />
+            </video>
           </div>
         </div>
       </div>

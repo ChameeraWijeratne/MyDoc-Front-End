@@ -109,7 +109,7 @@ form .form {
   margin-bottom: 15px;
 }
 form .form.third {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .fourth {
@@ -222,7 +222,7 @@ form button:hover {
   position: absolute;
   top: 100%; /* Position below the input field */
   left: 0;
-  margin-top: -120px; /* Adjust as needed for spacing */
+  margin-top: -106px; /* Adjust as needed for spacing */
   margin-left: 0px;
 }
 
