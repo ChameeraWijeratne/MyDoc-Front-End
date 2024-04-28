@@ -30,6 +30,7 @@ export const DoctorItem = (props) => {
       <img src={memoizedImageUrl || defaultImg} alt="" />
       <p>{props.name}</p>
       <p>{props.category}</p>
+      <p>{props.gender}</p>
       <p style={{ color: 'red' }}>{props.city}</p>
       <Link to={`/doctor-details/${props.id}`}>Show Profile</Link>
     </div>

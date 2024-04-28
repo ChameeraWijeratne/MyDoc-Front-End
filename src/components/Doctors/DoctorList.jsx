@@ -14,7 +14,6 @@ export const DoctorList = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -108,6 +107,7 @@ export const DoctorList = () => {
                 image={item.profilePic}
                 category={item.doctorCategory + ' (MBBS ' + item.mbbsId + ')'}
                 city={item.city}
+                gender={item.gender}
               />
               {isAdmin && (
                 <button

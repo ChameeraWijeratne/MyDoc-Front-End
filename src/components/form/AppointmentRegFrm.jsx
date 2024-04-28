@@ -33,7 +33,6 @@ export const AppointmentRegFrm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await axios.post(
         'http://localhost:8080/api/v1/appointment/save',

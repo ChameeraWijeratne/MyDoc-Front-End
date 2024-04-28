@@ -76,7 +76,7 @@ const AppointmentDetails = ({ appointment }) => {
     // Render a loading state while waiting for doctor details to load
     return <div>Loading...</div>;
   }
-
+  //RAV
   const handleDelete = async (id) => {
     Swal.fire({
       title: 'Do you want to Delete this Appointment?',

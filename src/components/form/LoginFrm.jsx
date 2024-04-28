@@ -28,7 +28,6 @@ export const LoginFrm = () => {
     const tableName = userType === 'doctor' ? 'doctor' : 'user';
 
     try {
-      // Send a request to the backend to authenticate the user
       const response = await axios.post(
         tableName === 'doctor'
           ? 'http://localhost:8080/api/v1/doctor/login'

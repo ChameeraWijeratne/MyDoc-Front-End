@@ -6,6 +6,7 @@ import PrivateRoute from './PrivateRoute';
 import './App.css';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
+import ContactUs from './pages/ContactUs/ContactUs';
 import Register from './pages/Signup/Signup';
 import DoctorReg from './pages/DoctorReg/DoctorReg';
 import AppontmentReg from './pages/AppointmentReg/AppointmentReg';
@@ -50,6 +51,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/userreg" element={<UserReg />} />
           <Route path="/docreg" element={<DoctorReg />} />
+          <Route path="/contactus" element={<ContactUs />} />
           <Route
             path="/myProfile"
             element={

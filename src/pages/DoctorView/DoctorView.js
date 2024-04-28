@@ -24,7 +24,7 @@ const DoctorDetails = () => {
     // Replace the fetchDoctorDetails function with your actual data fetching logic
     const fetchDoctorDetails = async () => {
       try {
-        // Fetch doctor details
+        //  RAV Fetch doctor details
         const response = await axios.get(
           `http://localhost:8080/api/v1/doctor/search/${id}`
         );
